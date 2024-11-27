@@ -46,7 +46,7 @@ password = input("Zadej heslo: ")
 
 print(f"{'-' * 40}")
 
-if user in registred_users and registred_users[user] == password:
+if registred_users.get(user) == password:
 	print(f"""
 Vítej {user}.
 Jsou k dispozici {len(TEXTS)} texty k analýze.
@@ -80,11 +80,11 @@ words_lower = []
 numbers = []
 
 for word in words:
-    if word.istitle() == True:
+    if word.istitle():
         words_title.append(word)
-    elif word.isupper() == True:
+    elif word.isupper():
         words_upper.append(word)
-    elif word.isnumeric() == True:
+    elif word.isnumeric():
         numbers.append(int(word))
     else:
         words_lower.append(word)
@@ -99,14 +99,11 @@ length_of_words_set = set()
 length_of_words_count = []
 
 for i, word in enumerate(words):
-    if "," in word:
-        words[i] = word.replace(",", "")
-    if "." in word:
-        words[i] = word.replace(".", "")
+    words[i] = word.replace(",", "").replace(".", "")
 
 for word in words:
-    length_of_words.append(len(str(word)))
-    length_of_words_set.add(len(str(word)))
+    length_of_words.append(len(word))
+    length_of_words_set.add(len(word))
 
 for value in length_of_words_set:
     result = length_of_words.count(value)
